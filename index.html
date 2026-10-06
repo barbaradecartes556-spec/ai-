@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小王.EXE — AI 产品经理</title>
+  <meta name="description" content="小王的复古像素风个人网站 —— AI 产品经理，专门把模型能力翻译成用户价值。" />
+  <meta name="theme-color" content="#0f0524" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Crect width='8' height='8' fill='%230f0524'/%3E%3Crect x='1' y='2' width='6' height='4' fill='%2300f0ff'/%3E%3Crect x='2' y='3' width='1' height='1' fill='%230f0524'/%3E%3Crect x='5' y='3' width='1' height='1' fill='%230f0524'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="is-booting">
+
+  <!-- ============================================================
+       开机画面 / BOOT SCREEN
+       点 "PRESS START" 后进入（同时解锁浏览器音频策略）
+  ============================================================= -->
+  <div class="boot" id="boot">
+    <div class="boot__inner">
+      <pre class="boot__log" id="bootLog" aria-hidden="true"></pre>
+
+      <div class="boot__press">
+        <button class="btn btn--big" id="startBtn" type="button">
+          <span class="btn__arrow">▶</span> PRESS START
+        </button>
+        <p class="boot__hint">（也可以直接按任意键）</p>
+      </div>
+
+      <p class="boot__credit">© 2026 小王.EXE &nbsp;·&nbsp; ALL RIGHTS RESERVED</p>
+    </div>
+  </div>
+
+  <!-- CRT 显示器效果层 -->
+  <div class="crt" aria-hidden="true">
+    <div class="crt__scanlines"></div>
+    <div class="crt__vignette"></div>
+    <div class="crt__flicker"></div>
+  </div>
+
+  <!-- ============================================================
+       顶部导航
+  ============================================================= -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#hero">
+      <span class="nav__logo-dot"></span>小王<span class="nav__logo-ext">.EXE</span>
+    </a>
+
+    <button class="nav__burger" id="navBurger" type="button" aria-label="打开菜单" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="主导航">
+      <a href="#about"    class="nav__link" data-sfx="blip">关于</a>
+      <a href="#skills"   class="nav__link" data-sfx="blip">技能</a>
+      <a href="#projects" class="nav__link" data-sfx="blip">作品</a>
+      <a href="#journey"  class="nav__link" data-sfx="blip">历程</a>
+      <a href="#contact"  class="nav__link nav__link--cta" data-sfx="coin">联系</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================
+         STAGE 01 — HERO
+    ============================================================= -->
+    <section class="hero" id="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="starfield" id="starfield"></div>
+      </div>
+
+      <div class="hero__grid">
+
+        <div class="hero__text">
+          <p class="hero__kicker">
+            <span class="tag">PLAYER</span>
+            <span class="tag tag--pink">CLASS: AI PRODUCT MANAGER</span>
+          </p>
+
+          <h1 class="hero__title glitch" data-text="小王.EXE">小王.EXE</h1>
+
+          <p class="hero__sub">
+            <span class="hero__prompt">&gt;</span>
+            <span id="typewriter" class="hero__typed"></span><span class="caret" aria-hidden="true">_</span>
+          </p>
+
+          <p class="hero__desc">
+            白天在需求、模型和工程师之间反复横跳，<br />
+            晚上对着 Prompt 发呆——然后把它变成一个大家都用得上的小功能。
+          </p>
+
+          <div class="hero__actions">
+            <button class="btn" id="ctaStart" type="button" data-target="#about">
+              <span class="btn__arrow">▶</span> START GAME
+            </button>
+            <button class="btn btn--ghost" id="ctaWorks" type="button" data-target="#projects">
+              <span class="btn__arrow">◇</span> VIEW QUESTS
+            </button>
+          </div>
+
+          <dl class="hero__stats">
+            <div><dt>LV.</dt><dd>99</dd></div>
+            <div><dt>HP</dt><dd>咖啡续命</dd></div>
+            <div><dt>MP</dt><dd>Prompt ×∞</dd></div>
+            <div><dt>EXP</dt><dd>持续升级中</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero__art">
+          <div class="avatar-wrap">
+            <canvas id="avatar" class="avatar" width="16" height="16" aria-label="像素风机器人头像" role="img"></canvas>
+            <div class="avatar__glow" aria-hidden="true"></div>
+          </div>
+          <p class="avatar__hint" id="avatarHint">点我一下试试 👆</p>
+        </div>
+
+      </div>
+
+      <a class="scroll-cue" href="#about" aria-label="向下滚动">
+        <span>SCROLL</span>
+        <span class="scroll-cue__arrow">▼</span>
+      </a>
+    </section>
+
+    <!-- 街机风格滚动条幅 -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>★ 需求洞察 ★ PROMPT ENGINEERING ★ RAG 检索 ★ 用户访谈 ★ A/B TEST ★ 数据埋点 ★ 模型评测 ★ 商业化思考 ★ 需求洞察 ★ PROMPT ENGINEERING ★ RAG 检索 ★ 用户访谈 ★ A/B TEST ★ 数据埋点 ★ 模型评测 ★ 商业化思考 ★</span>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         STAGE 02 — 关于我（NPC 对话）
+    ============================================================= -->
+    <section class="section" id="about">
+      <div class="container">
+        <p class="stage-label">STAGE 01 <span>/ ABOUT</span></p>
+        <h2 class="section__title">关于我</h2>
+
+        <div class="dialogue pixel-frame" id="dialogue">
+          <div class="dialogue__portrait">
+            <canvas id="avatarSmall" class="avatar avatar--sm" width="16" height="16" aria-hidden="true"></canvas>
+          </div>
+
+          <div class="dialogue__body">
+            <p class="dialogue__name">NPC · 小王</p>
+            <p class="dialogue__text" id="dialogueText"></p>
+            <div class="dialogue__next">
+              <span class="blink">▼</span> 点击继续
+            </div>
+          </div>
+        </div>
+
+        <ul class="facts">
+          <li class="fact pixel-frame">
+            <span class="fact__icon">01</span>
+            <h3>我在做什么</h3>
+            <p>把大模型那些"听起来很厉害"的能力，拆成用户真的会点的按钮。</p>
+          </li>
+          <li class="fact pixel-frame">
+            <span class="fact__icon">02</span>
+            <h3>我的日常</h3>
+            <p>写 PRD、跑评测集、画流程图、和算法同学争论"这个需求能不能做"。</p>
+          </li>
+          <li class="fact pixel-frame">
+            <span class="fact__icon">03</span>
+            <h3>我信什么</h3>
+            <p>AI 产品不是加个对话框就完事了 —— 关键是找到模型能力的"甜点区"。</p>
+          </li>
+          <li class="fact pixel-frame">
+            <span class="fact__icon">04</span>
+            <h3>工作之外</h3>
+            <p>打老游戏、拍照片、研究怎么把咖啡做得更像咖啡。</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STAGE 03 — 技能面板
+    ============================================================= -->
+    <section class="section section--alt" id="skills">
+      <div class="container">
+        <p class="stage-label">STAGE 02 <span>/ SKILLS</span></p>
+        <h2 class="section__title">属性面板</h2>
+        <p class="section__lead">按下 <kbd>START</kbd> 加点 —— 可惜加不了，只能靠上班。</p>
+
+        <div class="skills pixel-frame" id="skillsPanel">
+          <!-- 由 JS 渲染 -->
+        </div>
+
+        <div class="equip">
+          <h3 class="equip__title">⚔ 常驻装备 / TOOLKIT</h3>
+          <ul class="equip__list">
+            <li class="chip">ChatGPT / Claude</li>
+            <li class="chip">Figma</li>
+            <li class="chip">SQL</li>
+            <li class="chip">Python（能跑就行）</li>
+            <li class="chip">Axure / 墨刀</li>
+            <li class="chip">LangChain</li>
+            <li class="chip">Dify / Coze</li>
+            <li class="chip">Notion</li>
+            <li class="chip">Jira</li>
+            <li class="chip">Excel（真的）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STAGE 04 — 作品 / 关卡
+    ============================================================= -->
+    <section class="section" id="projects">
+      <div class="container">
+        <p class="stage-label">STAGE 03 <span>/ QUESTS</span></p>
+        <h2 class="section__title">通关记录</h2>
+        <p class="section__lead">每个项目都是一个关卡，有 Boss，也有奖励。</p>
+
+        <div class="quests">
+
+          <article class="quest pixel-frame" tabindex="0">
+            <header class="quest__head">
+              <span class="quest__lv">LV. 03</span>
+              <h3 class="quest__name">AI 周报机器人</h3>
+              <span class="quest__badge quest__badge--clear">CLEARED</span>
+            </header>
+            <p class="quest__desc">
+              让模型自动汇总团队一周的工作记录，生成结构化周报草稿，人工只做润色。
+            </p>
+            <ul class="quest__meta">
+              <li><b>我的角色</b>产品负责人</li>
+              <li><b>关键动作</b>定义输入规范 / 设计摘要链路 / 搭评测集</li>
+              <li><b>掉落奖励</b>团队每周省下约 5 小时</li>
+            </ul>
+            <ul class="quest__tags">
+              <li>LLM</li><li>Prompt</li><li>自动化</li>
+            </ul>
+          </article>
+
+          <article class="quest pixel-frame" tabindex="0">
+            <header class="quest__head">
+              <span class="quest__lv">LV. 05</span>
+              <h3 class="quest__name">智能客服知识库</h3>
+              <span class="quest__badge quest__badge--clear">CLEARED</span>
+            </header>
+            <p class="quest__desc">
+              基于 RAG 的企业知识检索问答，让客服不用再在 200 篇文档里人肉 CTRL+F。
+            </p>
+            <ul class="quest__meta">
+              <li><b>我的角色</b>AI 产品经理</li>
+              <li><b>关键动作</b>文档切分策略 / 召回评估 / 兜底话术设计</li>
+              <li><b>掉落奖励</b>首答命中率 +35%</li>
+            </ul>
+            <ul class="quest__tags">
+              <li>RAG</li><li>向量检索</li><li>评测</li>
+            </ul>
+          </article>
+
+          <article class="quest pixel-frame" tabindex="0">
+            <header class="quest__head">
+              <span class="quest__lv">LV. 04</span>
+              <h3 class="quest__name">Prompt 调试台</h3>
+              <span class="quest__badge quest__badge--clear">CLEARED</span>
+            </header>
+            <p class="quest__desc">
+              内部工具：同一批测试用例，一键对比多个 Prompt 版本的输出差异。
+            </p>
+            <ul class="quest__meta">
+              <li><b>我的角色</b>提出者 & 产品设计</li>
+              <li><b>关键动作</b>定义对比维度 / 设计 diff 视图</li>
+              <li><b>掉落奖励</b>Prompt 迭代效率 ×3</li>
+            </ul>
+            <ul class="quest__tags">
+              <li>内部工具</li><li>提效</li><li>Diff</li>
+            </ul>
+          </article>
+
+          <article class="quest quest--locked pixel-frame" tabindex="0">
+            <header class="quest__head">
+              <span class="quest__lv">LV. ??</span>
+              <h3 class="quest__name">下一个副本</h3>
+              <span class="quest__badge quest__badge--lock">LOCKED</span>
+            </header>
+            <p class="quest__desc">
+              正在加载中…… 也许是一个真正好用的 AI Agent，也许只是又一个聊天框。
+            </p>
+            <p class="quest__lock-hint">🔒 需要与「小王」组队解锁</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STAGE 05 — 历程（闯关地图）
+    ============================================================= -->
+    <section class="section section--alt" id="journey">
+      <div class="container">
+        <p class="stage-label">STAGE 04 <span>/ MAP</span></p>
+        <h2 class="section__title">升级路线</h2>
+        <p class="section__lead">从"什么是需求"到"什么是 token 成本"，一路打怪。</p>
+
+        <ol class="roadmap" id="roadmap">
+          <!-- 由 JS 渲染 -->
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STAGE 06 — 联系
+    ============================================================= -->
+    <section class="section" id="contact">
+      <div class="container container--narrow">
+        <p class="stage-label">STAGE 05 <span>/ CO-OP</span></p>
+        <h2 class="section__title">组队邀请</h2>
+        <p class="section__lead">
+          想聊 AI 产品、想吐槽需求、想找个一起把想法做出来的人 —— 都欢迎。
+        </p>
+
+        <div class="contact">
+
+          <button class="contact__card pixel-frame" id="copyMail" type="button"
+                  data-mail="hello@xiaowang.dev">
+            <span class="contact__icon">✉</span>
+            <span class="contact__label">邮箱</span>
+            <span class="contact__value" id="mailValue">hello@xiaowang.dev</span>
+            <span class="contact__action" id="mailAction">点击复制</span>
+          </button>
+
+          <a class="contact__card pixel-frame" href="#" data-sfx="coin" rel="noopener">
+            <span class="contact__icon">◎</span>
+            <span class="contact__label">小红书</span>
+            <span class="contact__value">@小王搞AI</span>
+            <span class="contact__action">去看看 →</span>
+          </a>
+
+          <button class="contact__card pixel-frame" id="copyWechat" type="button"
+                  data-mail="xiaowang_ai">
+            <span class="contact__icon">✎</span>
+            <span class="contact__label">公众号</span>
+            <span class="contact__value" id="wechatValue">小王搞AI</span>
+            <span class="contact__action" id="wechatAction">点击复制</span>
+          </button>
+
+        </div>
+
+        <p class="contact__note">
+          💡 小提示：试着依次按 <kbd>↑</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd><kbd>←</kbd><kbd>→</kbd><kbd>B</kbd><kbd>A</kbd>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       页脚
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__big" id="footerMotto">THANKS FOR PLAYING</p>
+      <p class="footer__small">
+        © 2026 小王.EXE &nbsp;|&nbsp; 用 HTML + CSS + JS 手工打造 &nbsp;|&nbsp; 无框架 · 无依赖 · 有咖啡
+      </p>
+      <p class="footer__small footer__small--dim">
+        <span class="blink">▮</span> INSERT COIN TO CONTINUE
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       左下角 HUD 控制台（右下角留给 Dify 聊天按钮）
+  ============================================================= -->
+  <div class="hud" id="hud">
+    <button class="hud__btn" id="bgmBtn" type="button" aria-pressed="false" title="背景音乐">
+      <span class="hud__icon">♪</span><span class="hud__txt">BGM OFF</span>
+    </button>
+    <button class="hud__btn" id="sfxBtn" type="button" aria-pressed="true" title="音效">
+      <span class="hud__icon">🔊</span><span class="hud__txt">SFX ON</span>
+    </button>
+    <button class="hud__btn hud__btn--top" id="topBtn" type="button" title="回到顶部">
+      <span class="hud__icon">▲</span><span class="hud__txt">TOP</span>
+    </button>
+  </div>
+
+  <!-- 成就提示条 -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast__icon">★</span>
+    <span class="toast__text" id="toastText"></span>
+  </div>
+
+  <!-- Konami 彩带画布 -->
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
+  <!-- 像素十字准星（跟随鼠标的小装饰） -->
+  <div class="reticle" id="reticle" aria-hidden="true">
+    <span></span><span></span>
+  </div>
+
+  <noscript>
+    <div class="noscript">这个世界需要 JavaScript 才能运行 🕹️ 请打开它。</div>
+  </noscript>
+
+  <!-- ============================================================
+       像素风 AI 聊天挂件
+       —— 自建前端，通过 /api/dify 调用 Dify 的接口
+
+       为什么不用 Dify 官方嵌入？
+         官方嵌入是跨域 iframe：内部样式改不了，且带有「POWERED BY Dify」品牌标识。
+         改成「自己的界面 + 调 API」后，界面风格与整站完全统一，也没有第三方标识。
+
+       功能对应关系（都与官方 WebApp 一致，且配置来自 Dify 后台）：
+         · 新对话设置（role 下拉）  ← GET  /parameters 的 user_input_form
+         · 开场白 / 推荐问题        ← GET  /parameters 的 opening_statement / suggested_questions
+         · 历史对话列表             ← GET  /conversations
+         · 点击历史回看消息         ← GET  /messages
+         · 点赞 / 点踩              ← POST /feedback
+         · 全屏、新对话
+
+       ⚠ API Key 由服务端持有，绝不能写到这里：
+         本地开发读 .env.local（server.py），线上读环境变量（api/dify.js）。
+         交互逻辑见 js/chat.js
+  ============================================================= -->
+  <div class="chatw" id="chatw">
+
+    <section class="chatw__panel" id="chatwPanel" hidden aria-label="AI 聊天窗口">
+
+      <header class="chatw__head">
+        <canvas class="chatw__avatar" id="chatwAvatar" width="16" height="16" aria-hidden="true"></canvas>
+        <span class="chatw__title">WANG-BOT</span>
+        <span class="chatw__status">ONLINE</span>
+        <button class="chatw__icon-btn" id="chatwHistoryBtn" type="button"
+                title="历史对话" aria-label="历史对话" aria-pressed="false">☰</button>
+        <button class="chatw__icon-btn" id="chatwFullBtn" type="button"
+                title="全屏" aria-label="切换全屏" aria-pressed="false">⛶</button>
+        <button class="chatw__icon-btn" id="chatwClose" type="button"
+                title="关闭" aria-label="关闭聊天窗口">✕</button>
+      </header>
+
+      <!-- 新对话设置：选项由 Dify 的 user_input_form 动态渲染 -->
+      <div class="chatw__setup" id="chatwSetup" hidden>
+        <span class="chatw__setup-label">新对话设置</span>
+        <div class="chatw__fields" id="chatwFields"></div>
+      </div>
+
+      <div class="chatw__body">
+        <div class="chatw__log" id="chatwLog" role="log" aria-live="polite" aria-label="对话内容"></div>
+
+        <!-- 历史对话视图：与消息区互斥显示 -->
+        <div class="chatw__history" id="chatwHistory" hidden>
+          <button class="chatw__new" id="chatwNew" type="button">
+            <span aria-hidden="true">＋</span> 开启新对话
+          </button>
+          <ul class="chatw__convs" id="chatwConvs"></ul>
+        </div>
+      </div>
+
+      <form class="chatw__form" id="chatwForm">
+        <span class="chatw__prompt" aria-hidden="true">&gt;</span>
+        <input class="chatw__input" id="chatwInput" type="text" autocomplete="off"
+               maxlength="500" placeholder="说点什么…（Enter 发送）" aria-label="输入消息" />
+        <button class="chatw__send" id="chatwSend" type="submit" aria-label="发送">▶</button>
+      </form>
+
+    </section>
+
+    <button class="chatw__toggle" id="chatwToggle" type="button"
+            aria-expanded="false" aria-controls="chatwPanel">
+      <!-- 像素对话气泡，全部用方框拼出来 -->
+      <svg class="chatw__ico" viewBox="0 0 12 12" width="22" height="22"
+           shape-rendering="crispEdges" aria-hidden="true" focusable="false">
+        <g fill="currentColor">
+          <rect x="1" y="2" width="10" height="6"/>
+          <rect x="2" y="8" width="2" height="1"/>
+          <rect x="2" y="9" width="1" height="1"/>
+        </g>
+        <g class="chatw__ico-dots">
+          <rect x="3" y="4" width="1" height="1"/>
+          <rect x="5" y="4" width="1" height="1"/>
+          <rect x="7" y="4" width="1" height="1"/>
+        </g>
+      </svg>
+      <span class="chatw__toggle-txt">ASK AI</span>
+    </button>
+
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>
